@@ -10,6 +10,11 @@ activityCompose = "1.9.0"
 composeBom = "2023.08.00"
 ksp= "1.9.23-1.0.20"
 hilt = "2.51.1"
+android-hilt = "1.2.0"
+plugin-hilt = "2.51.1"
+retrofit = "2.9.0"
+kotlinSerialization = "1.6.0"
+logging = "4.10.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -29,9 +34,16 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 dagger-hilt-plugin = { group = "com.google.dagger", name = "hilt-android-gradle-plugin", version.ref = "hilt"}
 dagger-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref ="hilt" }
 dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref ="hilt" }
-
+dagger-hilt-android-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref ="android-hilt" }
+dagger-hilt-android-compose = {group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "android-hilt" }
+dagger-hilt-android-navigation = {group = "androidx.hilt", name = "hilt-navigation", version.ref = "android-hilt" }
+retrofit = {group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-gson = {group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit"}
+kotlin-serialization = {group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinSerialization"}
+okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "logging"  }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+daggerHiltAndroid = { id = "com.google.dagger.hilt.android", version.ref = "plugin-hilt"}
 kspAndroid = { id = "com.google.devtools.ksp", version.ref = "ksp" }

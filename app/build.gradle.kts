@@ -2,8 +2,9 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id ("dagger.hilt.android.plugin")
+    id("kotlin-kapt")
     id("com.google.devtools.ksp")
-
+    kotlin("plugin.serialization")
 }
 
 android {
@@ -33,11 +34,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_18
-        targetCompatibility = JavaVersion.VERSION_18
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "18"
+        jvmTarget = "1.8"
     }
     buildFeatures {
         compose = true
@@ -62,8 +63,21 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    //Hilt
     implementation (libs.dagger.hilt.android)
+    //Android Hilt
+    ksp (libs.dagger.hilt.android.compiler)
     ksp (libs.dagger.hilt.compiler)
+    implementation (libs.dagger.hilt.android.compose)
+    implementation (libs.dagger.hilt.android.navigation)
+
+    //Retrofit
+    implementation (libs.retrofit)
+    implementation (libs.retrofit.gson)
+    //Serialization
+    implementation(libs.kotlin.serialization)
+    //log interceptor
+    implementation (libs.okhttp.logging)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
