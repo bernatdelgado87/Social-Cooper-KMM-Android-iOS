@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Social Cooper Android</string>
+    <string name="like">Me gusta</string>
+    <string name="comment">Comentar</string>
+    <string name="post_like_people">%d Me gusta</string>
+</resources>

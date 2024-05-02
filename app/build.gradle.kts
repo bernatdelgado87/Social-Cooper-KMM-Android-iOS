@@ -78,6 +78,8 @@ dependencies {
     implementation(libs.kotlin.serialization)
     //log interceptor
     implementation (libs.okhttp.logging)
+    //remote image
+    implementation(libs.coil)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
