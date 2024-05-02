@@ -6,7 +6,6 @@ import app.mistercooper.social.domain.feature.home.model.FeedModel
 import app.mistercooper.social.domain.repository.SocialRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
 
 class GetFeedUseCase @Inject constructor(val socialRepository: SocialRepository): UseCase<FeedModel, None>() {

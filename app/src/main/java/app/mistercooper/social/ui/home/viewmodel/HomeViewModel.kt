@@ -1,9 +1,9 @@
-package app.mistercooper.social.ui.theme.viewmodel
+package app.mistercooper.social.ui.home.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.mistercooper.social.domain.feature.home.GetFeedUseCase
-import app.mistercooper.social.ui.model.HomeUiModel
+import app.mistercooper.social.ui.home.model.HomeUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

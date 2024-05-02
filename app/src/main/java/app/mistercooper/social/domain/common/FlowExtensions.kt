@@ -1,6 +1,5 @@
 package app.mistercooper.social.domain.common
 
-import android.util.Log
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.catch

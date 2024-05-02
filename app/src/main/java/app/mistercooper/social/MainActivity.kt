@@ -10,9 +10,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import app.mistercooper.social.ui.HomeScreen
+import app.mistercooper.social.ui.home.HomeScreen
+import app.mistercooper.social.ui.home.viewmodel.HomeViewModel
 import app.mistercooper.social.ui.theme.SocialCooperAndroidTheme
-import app.mistercooper.social.ui.theme.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

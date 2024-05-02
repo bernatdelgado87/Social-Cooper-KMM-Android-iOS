@@ -16,6 +16,7 @@ retrofit = "2.9.0"
 kotlinSerialization = "1.6.0"
 logging = "4.10.0"
 coil = "2.6.0"
+animationGraphicsAndroid = "1.6.6"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -43,6 +44,7 @@ retrofit-gson = {group = "com.squareup.retrofit2", name = "converter-gson", vers
 kotlin-serialization = {group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinSerialization"}
 okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "logging"  }
 coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+androidx-animation-graphics-android = { group = "androidx.compose.animation", name = "animation-graphics-android", version.ref = "animationGraphicsAndroid" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

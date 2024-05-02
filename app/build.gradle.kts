@@ -65,6 +65,7 @@ dependencies {
     implementation(libs.androidx.material3)
     //Hilt
     implementation (libs.dagger.hilt.android)
+    implementation(libs.androidx.animation.graphics.android)
     //Android Hilt
     ksp (libs.dagger.hilt.android.compiler)
     ksp (libs.dagger.hilt.compiler)

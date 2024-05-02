@@ -1,6 +1,6 @@
 package app.mistercooper.social.data.remote.dto
 
-import kotlinx.serialization.Serializable as Serializable
+import kotlinx.serialization.Serializable
 
 @Serializable
 data class MultimediaFeedDTO(
@@ -15,12 +15,12 @@ data class LikeSimplifiedDTO (
 
 @Serializable
 data class MultimediaDTO (
-    val id: Int? = null,
-    val userId: Int? = null,
+    val id: Long,
+    val userId: Int,
     val description: String? = null,
-    val relativeUrl: String? = null,
-    val absoluteUrl: String? = null,
-    val numberOfLikes: Int? = null,
+    val relativeUrl: String,
+    val absoluteUrl: String,
+    val numberOfLikes: Int = 0,
     val likes: List<LikeSimplifiedDTO>? = null)
 
 

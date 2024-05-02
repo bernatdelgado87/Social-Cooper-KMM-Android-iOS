@@ -12,9 +12,10 @@ fun MultimediaFeedDTO.toModel() = FeedModel(
 )
 
 fun MultimediaDTO.toModel() = Post(
-    id = id!!,
-    user = UserModel(id = userId!!),
-    description = description!!,
-    imageUrl = absoluteUrl!!,
-    numberOfLikes = numberOfLikes!!
+    id = id,
+    user = UserModel(id = userId),
+    description = description,
+    imageUrl = absoluteUrl,
+    numberOfLikes = numberOfLikes,
+    comments = emptyList() // fixme!!!
 )
