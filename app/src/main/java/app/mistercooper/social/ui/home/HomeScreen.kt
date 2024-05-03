@@ -30,7 +30,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import app.mistercooper.social.R
-import app.mistercooper.social.domain.feature.home.model.Post
+import app.mistercooper.social.domain.feature.home.model.PostModel
 import app.mistercooper.social.ui.comment.CommentsBottomSheet
 import app.mistercooper.social.ui.common.UserMiniatureComponent
 import app.mistercooper.social.ui.home.mock.mockPosts
@@ -39,8 +39,8 @@ import coil.compose.AsyncImage
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(posts: List<Post>?) {
-    posts?.let { posts ->
+fun HomeScreen(postModels: List<PostModel>?) {
+    postModels?.let { posts ->
         LazyColumn {
             items(posts) { post ->
                 Column(modifier = Modifier.fillMaxSize()) {

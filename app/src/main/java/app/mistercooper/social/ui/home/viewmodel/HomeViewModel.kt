@@ -37,7 +37,7 @@ class HomeViewModel @Inject constructor(
                     _homeuiModelState.emit(HomeUiModel(isError = true))
 
                 }.collect { response ->
-                    _homeuiModelState.emit(HomeUiModel(posts = response.posts))
+                    _homeuiModelState.emit(HomeUiModel(postModels = response.postModels))
                 }
         }
     }

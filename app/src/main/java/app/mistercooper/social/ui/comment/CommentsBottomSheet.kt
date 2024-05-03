@@ -56,7 +56,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import app.mistercooper.social.R
-import app.mistercooper.social.domain.feature.home.model.Comment
+import app.mistercooper.social.domain.feature.comment.model.CommentModel
 import app.mistercooper.social.ui.comment.viewmodel.CommentViewModel
 import app.mistercooper.social.ui.common.CustomTextField
 import app.mistercooper.social.ui.common.UserMiniatureComponent
@@ -123,7 +123,7 @@ fun CommentsBottomSheet(
 }
 
 @Composable
-fun CommentsListComponent(comments: List<Comment>?, getComments: () -> Unit) {
+fun CommentsListComponent(comments: List<CommentModel>?, getComments: () -> Unit) {
     if (comments == null) {
         getComments()
     } else {

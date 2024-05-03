@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
 
                 ) {
                     val state = hiltViewModel<HomeViewModel>().homeUiModel.collectAsState()
-                    HomeScreen(state.value.posts)
+                    HomeScreen(state.value.postModels)
                     if (state.value.isLoading) {
                         Text(
                             text = "Is Loading",
