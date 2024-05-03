@@ -2,6 +2,7 @@ package app.mistercooper.social.ui.comment.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import app.mistercooper.social.domain.feature.comment.GetCommentsUseCase
 import app.mistercooper.social.domain.feature.comment.PublishCommentUseCase
 import app.mistercooper.social.ui.comment.model.PublishCommentUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,6 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CommentViewModel @Inject constructor(
     private val publishCommentUseCase: PublishCommentUseCase,
+    private val getCommentsUseCase: GetCommentsUseCase,
 ) : ViewModel() {
     private val _commentUiModelState = MutableStateFlow(PublishCommentUiModel())
     val commentUiModel = _commentUiModelState.asStateFlow()
@@ -25,11 +27,29 @@ class CommentViewModel @Inject constructor(
                 PublishCommentUseCase.PublishCommentParams(comment, postId, commentReferentId)
             )
                 .onStart {
-                    _commentUiModelState.emit(PublishCommentUiModel(isLoading = true))
+                    _commentUiModelState.emit(commentUiModel.value.copy(isError = false, isLoadingPublish = true))
                 }
                 .catch {
                     it.printStackTrace()
-                    _commentUiModelState.emit(PublishCommentUiModel(isError = true))
+                    _commentUiModelState.emit(commentUiModel.value.copy(isError = true, isLoadingPublish = false))
+
+                }.collect { response ->
+                    _commentUiModelState.emit(PublishCommentUiModel(comments = response))
+                }
+        }
+    }
+
+    fun getComments(postId: Long) {
+        viewModelScope.launch {
+            getCommentsUseCase(
+                GetCommentsUseCase.GetCommentsParams(postId)
+            )
+                .onStart {
+                    _commentUiModelState.emit(commentUiModel.value.copy(isError = false, isLoadingComments = true))
+                }
+                .catch {
+                    it.printStackTrace()
+                    _commentUiModelState.emit(commentUiModel.value.copy(isError = true, isLoadingComments = false))
 
                 }.collect { response ->
                     _commentUiModelState.emit(PublishCommentUiModel(comments = response))

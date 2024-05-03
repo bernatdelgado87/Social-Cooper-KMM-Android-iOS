@@ -11,32 +11,27 @@ fun mockPosts() = listOf(
         "Descripcion",
         "url",
         12,
-        mockCommments()
+        12
     ),
     Post(
         1, UserModel(1, "usuario"),
         "Descripcion",
         "url",
         12,
-        emptyList()
+        0
     ),
     Post(
         1, UserModel(1, "usuario"),
         "Descripcion",
         "url",
         12,
-        mockCommments()
+        1
     ),
     Post(
         1, UserModel(1, "usuario"),
         "Descripcion",
         "url",
         12,
-        mockCommments()
+        40000
     )
 )
-
-fun mockCommments() = listOf(Comment("Lorem ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    Date(),
-    UserModel(1, "Kevin Martin"),
-    ))

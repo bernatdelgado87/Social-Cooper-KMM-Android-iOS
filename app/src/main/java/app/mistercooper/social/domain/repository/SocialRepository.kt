@@ -6,4 +6,5 @@ import app.mistercooper.social.domain.feature.home.model.FeedModel
 interface SocialRepository {
     suspend fun getFeed(): FeedModel
     suspend fun publishComment(comment: String, postId: Long, commentReferentId: Int? = null): List<Comment>
+    suspend fun getComments(postId: Long): List<Comment>
 }

@@ -6,8 +6,8 @@ data class Post(val id: Long,
                 val user: UserModel,
                 val description: String?,
                 val imageUrl: String,
-                val numberOfLikes: Int,
-                val comments: List<Comment>)
+                val totalLikes: Int,
+                val totalComments: Int)
 
 data class Comment(val text: String,
                    val date: Date,

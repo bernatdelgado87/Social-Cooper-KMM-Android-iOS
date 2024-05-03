@@ -33,6 +33,10 @@ class SocialRepositoryImpl @Inject constructor(private val apiRemote: CooperApi)
         return mockCommentResponse()
     }
 
+    override suspend fun getComments(postId: Long): List<Comment> {
+        return mockCommentResponse()
+    }
+
     private suspend fun mockCommentResponse(): List<Comment>{
         delay(5000)
         return listOf(

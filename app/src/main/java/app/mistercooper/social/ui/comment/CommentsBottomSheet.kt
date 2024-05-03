@@ -7,7 +7,10 @@ import androidx.compose.animation.graphics.res.animatedVectorResource
 import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
 import androidx.compose.animation.graphics.vector.AnimatedImageVector
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,6 +22,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Send
 import androidx.compose.material3.BottomSheetDefaults
@@ -40,8 +45,11 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.IntOffset
@@ -57,9 +65,19 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
-fun CommentsBottomSheet(postId: Long, comments: List<Comment>?, writeNow: Boolean, onDismiss: () -> Unit) {
+fun CommentsBottomSheet(
+    postId: Long,
+    totalComments: Int,
+    writeNow: Boolean,
+    onDismiss: () -> Unit
+) {
+    val viewModel = hiltViewModel<CommentViewModel>()
+    val viewModelState = viewModel.commentUiModel.collectAsState()
+
     val modalBottomSheetState = rememberModalBottomSheetState()
     var modalHeight by remember { mutableStateOf(0) }
+
+    viewModel.getComments(postId)
 
     ModalBottomSheet(
         modifier = Modifier
@@ -74,7 +92,9 @@ fun CommentsBottomSheet(postId: Long, comments: List<Comment>?, writeNow: Boolea
         dragHandle = { BottomSheetDefaults.DragHandle() },
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
-            if (comments.isNullOrEmpty()) {
+            if (totalComments > 0) {
+                CommentsListComponent(viewModelState.value.comments) { viewModel.getComments(postId) }
+            } else {
                 Column(
                     modifier = Modifier
                         .fillMaxHeight(0.8f)
@@ -96,10 +116,43 @@ fun CommentsBottomSheet(postId: Long, comments: List<Comment>?, writeNow: Boolea
                         style = MaterialTheme.typography.headlineMedium,
                     )
                 }
-            } else {
-                //TODO lazyColumn with comments
             }
             CommentsFooterComponent(postId, modalHeight, modalBottomSheetState, writeNow)
+        }
+    }
+}
+
+@Composable
+fun CommentsListComponent(comments: List<Comment>?, getComments: () -> Unit) {
+    if (comments == null) {
+        getComments()
+    } else {
+        LazyColumn() {
+            items(comments) { comment ->
+                Row(modifier = Modifier.padding(vertical = 10.dp)) {
+                    UserMiniatureComponent()
+                    Column {
+                        Row {
+                            Text(
+                                modifier = Modifier.padding(horizontal = 8.dp),
+                                text = "Nombre Usuario",
+                                style = MaterialTheme.typography.headlineSmall
+                            )
+                            Text(
+                                modifier = Modifier.padding(horizontal = 8.dp),
+                                text = comment.date.toString(),
+                                style = MaterialTheme.typography.bodySmall,
+                                maxLines = 1)
+                        }
+                        Row(
+                            modifier = Modifier.padding(horizontal = 8.dp),
+                        ) {
+                            Text(text = comment.text,
+                                style = MaterialTheme.typography.bodyMedium)
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -116,6 +169,8 @@ fun CommentsFooterComponent(
 
     var footerHeight by remember { mutableStateOf(0) }
     val bottomPadding = ButtonDefaults.MinHeight.toPx()
+    val focusManager = LocalFocusManager.current
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -128,33 +183,44 @@ fun CommentsFooterComponent(
             .onGloballyPositioned {
                 footerHeight = (((it.size.height * 1)) + bottomPadding + 0).toInt()
             }
-            .padding(vertical = 30.dp)
     ) {
-        UserMiniatureComponent()
-        var commentText by remember { mutableStateOf("") }
-        CustomTextField(
+        Box(
             modifier = Modifier
-                .fillMaxWidth(0.9f)
-                .padding(horizontal = 8.dp)
-                .height(40.dp),
-            onTextChanged = { newText -> commentText = newText },
-            showKeyboard,
-            stringResource(id = R.string.comment_hint),
-            singleLine = false
-        )
-        if(viewModelState.value.isLoading) {
-            AnimatedLoadingPublishComment()
-        }else {
-            Icon(
-                Icons.Rounded.Send,
-                contentDescription = stringResource(id = R.string.comment),
-                modifier = Modifier
-                    .padding(4.dp)
-                    .align(Alignment.CenterVertically)
-                    .clickable {
-                        viewModel.publishComment(commentText, postId)
-                    }
-            )
+                .background(color = Color.Black)
+                .fillMaxWidth()
+                .padding(top = 10.dp, bottom = 40.dp)
+
+        ) {
+            Row(Modifier.fillMaxWidth()) {
+
+                UserMiniatureComponent()
+                var commentText by remember { mutableStateOf("") }
+                CustomTextField(
+                    modifier = Modifier
+                        .fillMaxWidth(0.9f)
+                        .padding(horizontal = 8.dp)
+                        .height(40.dp),
+                    onTextChanged = { newText -> commentText = newText },
+                    showKeyboard,
+                    stringResource(id = R.string.comment_hint),
+                    singleLine = false
+                )
+                if (viewModelState.value.isLoadingPublish) {
+                    AnimatedLoadingPublishComment()
+                } else {
+                    Icon(
+                        Icons.Rounded.Send,
+                        contentDescription = stringResource(id = R.string.comment),
+                        modifier = Modifier
+                            .padding(4.dp)
+                            .align(Alignment.CenterVertically)
+                            .clickable {
+                                focusManager.clearFocus()
+                                viewModel.publishComment(commentText, postId)
+                            }
+                    )
+                }
+            }
         }
     }
 }

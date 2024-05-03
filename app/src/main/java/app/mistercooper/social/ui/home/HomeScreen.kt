@@ -66,11 +66,11 @@ fun HomeScreen(posts: List<Post>?) {
                             )
                         }
                     }
-                    if (post.numberOfLikes > 0) {
+                    if (post.totalLikes > 0) {
                         Text(
                             text = stringResource(
                                 id = R.string.post_like_people,
-                                post.numberOfLikes
+                                post.totalLikes
                             ),
                             modifier = Modifier.padding(4.dp)
                         )
@@ -84,7 +84,7 @@ fun HomeScreen(posts: List<Post>?) {
                         var showSheet by remember { mutableStateOf(false) }
 
                         if (showSheet) {
-                            CommentsBottomSheet(post.id, post.comments, true) {
+                            CommentsBottomSheet(post.id, post.totalComments, true) {
                                 showSheet = false
                             }
                         }
