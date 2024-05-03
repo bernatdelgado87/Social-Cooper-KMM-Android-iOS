@@ -1,10 +1,10 @@
-package app.mistercooper.social.ui.comment.viewmodel
+package app.mistercooper.social.ui.feature.comment.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.mistercooper.social.domain.feature.comment.GetCommentsUseCase
 import app.mistercooper.social.domain.feature.comment.PublishCommentUseCase
-import app.mistercooper.social.ui.comment.model.PublishCommentUiModel
+import app.mistercooper.social.ui.feature.comment.model.PublishCommentUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

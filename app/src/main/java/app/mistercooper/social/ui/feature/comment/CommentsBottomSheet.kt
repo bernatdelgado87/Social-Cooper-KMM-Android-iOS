@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package app.mistercooper.social.ui.comment
+package app.mistercooper.social.ui.feature.comment
 
 import androidx.compose.animation.graphics.ExperimentalAnimationGraphicsApi
 import androidx.compose.animation.graphics.res.animatedVectorResource
@@ -54,10 +54,10 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import app.mistercooper.social.R
 import app.mistercooper.social.domain.feature.comment.model.CommentModel
-import app.mistercooper.social.ui.comment.viewmodel.CommentViewModel
 import app.mistercooper.social.ui.common.CustomTextField
 import app.mistercooper.social.ui.common.UserMiniatureComponent
-import app.mistercooper.social.ui.common.toPx
+import app.mistercooper.social.ui.common.utils.toPx
+import app.mistercooper.social.ui.feature.comment.viewmodel.CommentViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

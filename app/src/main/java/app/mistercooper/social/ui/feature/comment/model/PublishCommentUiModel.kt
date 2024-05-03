@@ -1,4 +1,4 @@
-package app.mistercooper.social.ui.comment.model
+package app.mistercooper.social.ui.feature.comment.model
 
 import app.mistercooper.social.domain.feature.comment.model.CommentModel
 

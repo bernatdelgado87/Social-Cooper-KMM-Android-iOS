@@ -1,4 +1,4 @@
-package app.mistercooper.social.ui.home.model
+package app.mistercooper.social.ui.feature.home.model
 
 import app.mistercooper.social.domain.feature.home.model.PostModel
 

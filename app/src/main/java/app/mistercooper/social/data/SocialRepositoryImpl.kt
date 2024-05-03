@@ -1,4 +1,4 @@
-package app.mistercooper.social.data.remote
+package app.mistercooper.social.data
 
 import app.mistercooper.social.data.remote.api.CooperApi
 import app.mistercooper.social.domain.common.GlobalFailure

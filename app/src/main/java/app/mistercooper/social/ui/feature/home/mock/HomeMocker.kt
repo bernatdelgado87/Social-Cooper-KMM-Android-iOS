@@ -1,4 +1,4 @@
-package app.mistercooper.social.ui.home.mock
+package app.mistercooper.social.ui.feature.home.mock
 
 import app.mistercooper.social.domain.feature.home.model.PostModel
 import app.mistercooper.social.domain.feature.home.model.UserModel

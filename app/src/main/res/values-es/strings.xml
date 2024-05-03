@@ -7,5 +7,6 @@
     <string name="comments_empty_title">Esto está muy vacío</string>
     <string name="like">Me gusta</string>
     <string name="post_like_people">%d Me gusta</string>
+    <string name="permission_denied">No se han concedido los permisos necesarios</string>
 
 </resources>
