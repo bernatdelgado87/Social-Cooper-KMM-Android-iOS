@@ -15,10 +15,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.FavoriteBorder
 import androidx.compose.material.icons.rounded.MailOutline
-import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -36,6 +34,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import app.mistercooper.social.R
 import app.mistercooper.social.domain.feature.home.model.PostModel
+import app.mistercooper.social.ui.common.components.CommonScaffoldBottomBar
 import app.mistercooper.social.ui.common.components.LoadingComponent
 import app.mistercooper.social.ui.common.components.UserMiniatureComponent
 import app.mistercooper.social.ui.common.navigation.NavigationRoute
@@ -46,37 +45,32 @@ import app.mistercooper.social.ui.feature.home.viewmodel.HomeViewModel
 import app.mistercooper.social.ui.theme.SocialCooperAndroidTheme
 import coil.compose.AsyncImage
 
-
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier, navController: NavController) {
-    Scaffold(
-        bottomBar = {
-            BottomAppBar(
-                content = {
-                    Icon(imageVector = Icons.Rounded.Add, contentDescription = "add",
-                        modifier = Modifier
-                            .clickable {
-                                navController.navigate(NavigationRoute.PUBLISH_HOME)
-                            }
-                    )
-                }
-            )
-        },
-        content = { padding ->
-            val state = hiltViewModel<HomeViewModel>().homeUiModel.collectAsState()
-            HomeFeedView(modifier = modifier.padding(padding), postModels = state.value.postModels)
+fun HomeScreen(navController: NavController) {
+    val viewModel= hiltViewModel<HomeViewModel>()
+    val state = viewModel.homeUiModel.collectAsState()
+
+    CommonScaffoldBottomBar(
+        navController = navController,
+        content = { modifier ->
+            HomeFeedView(modifier = modifier, postModels = state.value.postModels)
             if (state.value.isLoading) {
                 LoadingComponent()
             }
             if (state.value.isError) {
                 ErrorComponent()
             }
-        }
+        },
+        showError = state.value.isError,
+        actionFloatingButton = {
+            navController.navigate(NavigationRoute.PUBLISH_HOME)
+        },
+        iconVectorFloatingButton = Icons.Rounded.Add
     )
 }
 
 @Composable
-fun ErrorComponent(){
+fun ErrorComponent() {
     Text(
         text = "Is Error",
     )
@@ -102,7 +96,7 @@ fun HomeFeedView(postModels: List<PostModel>?, modifier: Modifier = Modifier) {
                                 .padding(8.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                        UserComponent()
+                            UserComponent()
                         }
                     }
                     if (post.totalLikes > 0) {
@@ -127,7 +121,7 @@ fun HomeFeedView(postModels: List<PostModel>?, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun UserComponent(){
+fun UserComponent() {
     UserMiniatureComponent()
     Text(
         text = "Nombre Usuario",
@@ -137,7 +131,7 @@ fun UserComponent(){
 }
 
 @Composable
-fun InteractionIconsComponent(post: PostModel){
+fun InteractionIconsComponent(post: PostModel) {
     Row {
         Icon(
             imageVector = Icons.Rounded.FavoriteBorder,
