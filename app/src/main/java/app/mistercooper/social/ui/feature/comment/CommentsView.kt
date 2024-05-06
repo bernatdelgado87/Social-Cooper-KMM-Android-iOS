@@ -54,8 +54,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import app.mistercooper.social.R
 import app.mistercooper.social.domain.feature.comment.model.CommentModel
-import app.mistercooper.social.ui.common.CustomTextField
-import app.mistercooper.social.ui.common.UserMiniatureComponent
+import app.mistercooper.social.ui.common.components.CustomTextField
+import app.mistercooper.social.ui.common.components.UserMiniatureComponent
 import app.mistercooper.social.ui.common.utils.toPx
 import app.mistercooper.social.ui.feature.comment.viewmodel.CommentViewModel
 import kotlinx.coroutines.delay

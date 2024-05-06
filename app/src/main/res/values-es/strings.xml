@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Social Cooper Android</string>
+    <string name="add_photo_content_description">Añadir foto</string>
+    <string name="back">Back</string>
     <string name="comment">Comentar</string>
     <string name="comment_hint">Escribe un comentario...</string>
     <string name="comments_empty_body">Sé el primero en comentar</string>
     <string name="comments_empty_title">Esto está muy vacío</string>
+    <string name="error_message">Error: Algo ha ido mal</string>
+    <string name="image_selection_title">Selección de medios</string>
+    <string name="image_selection_body">Puedes usar tu cámara o subir una imagen de tu dispositivo</string>
     <string name="like">Me gusta</string>
-    <string name="post_like_people">%d Me gusta</string>
+    <string name="next">Siguiente</string>
     <string name="permission_denied">No se han concedido los permisos necesarios</string>
+    <string name="post_like_people">%d Me gusta</string>
+    <string name="post_enter_text_hint">Escribe algo...</string>
+    <string name="publish_camera_option">Cámara</string>
+    <string name="publish_files_option">Archivos</string>
+    <string name="publish_now_button">Publicar</string>
+    <string name="publish_now_title">Publicación</string>
+    <string name="your_photo_content_description">Tu foto</string>
 
 </resources>

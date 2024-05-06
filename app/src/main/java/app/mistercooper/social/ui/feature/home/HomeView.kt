@@ -36,8 +36,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import app.mistercooper.social.R
 import app.mistercooper.social.domain.feature.home.model.PostModel
-import app.mistercooper.social.ui.common.UserMiniatureComponent
+import app.mistercooper.social.ui.common.components.LoadingComponent
+import app.mistercooper.social.ui.common.components.UserMiniatureComponent
 import app.mistercooper.social.ui.common.navigation.NavigationRoute
+import app.mistercooper.social.ui.common.navigation.navigate
 import app.mistercooper.social.ui.feature.comment.CommentsBottomSheet
 import app.mistercooper.social.ui.feature.home.mock.mockPosts
 import app.mistercooper.social.ui.feature.home.viewmodel.HomeViewModel
@@ -54,7 +56,7 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavController) {
                     Icon(imageVector = Icons.Rounded.Add, contentDescription = "add",
                         modifier = Modifier
                             .clickable {
-                                navController.navigate(NavigationRoute.PUBLISH_HOME.name)
+                                navController.navigate(NavigationRoute.PUBLISH_HOME)
                             }
                     )
                 }
@@ -70,13 +72,6 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavController) {
                 ErrorComponent()
             }
         }
-    )
-}
-
-@Composable
-fun LoadingComponent(){
-    Text(
-        text = "Is Loading",
     )
 }
 
@@ -152,7 +147,11 @@ fun InteractionIconsComponent(post: PostModel){
         var showSheet by remember { mutableStateOf(false) }
 
         if (showSheet) {
-            CommentsBottomSheet(post.id, post.totalComments, true) {
+            CommentsBottomSheet(
+                postId = post.id,
+                totalComments = post.totalComments,
+                writeNow = true
+            ) {
                 showSheet = false
             }
         }

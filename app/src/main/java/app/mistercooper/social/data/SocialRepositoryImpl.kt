@@ -8,6 +8,7 @@ import app.mistercooper.social.domain.feature.home.model.FeedModel
 import app.mistercooper.social.domain.feature.home.model.UserModel
 import app.mistercooper.social.domain.repository.SocialRepository
 import kotlinx.coroutines.delay
+import java.io.File
 import java.util.Date
 import javax.inject.Inject
 
@@ -26,7 +27,6 @@ class SocialRepositoryImpl @Inject constructor(private val apiRemote: CooperApi)
             e.printStackTrace()
             throw GlobalFailure.GlobalError(e)
         }
-
     }
 
     override suspend fun publishComment(comment: String, postId: Long, commentReferentId: Int?): List<CommentModel> {
@@ -35,6 +35,22 @@ class SocialRepositoryImpl @Inject constructor(private val apiRemote: CooperApi)
 
     override suspend fun getComments(postId: Long): List<CommentModel> {
         return mockCommentResponse()
+    }
+
+    override suspend fun publishPost(text: String, file: File) {
+        try {
+            val response = apiRemote.publishPost(text, file)
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    return
+                }
+            }
+            throw GlobalFailure.GlobalError()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            throw GlobalFailure.GlobalError(e)
+        }
+
     }
 
     private suspend fun mockCommentResponse(): List<CommentModel>{

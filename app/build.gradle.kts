@@ -72,14 +72,16 @@ dependencies {
     ksp (libs.dagger.hilt.compiler)
     implementation (libs.dagger.hilt.android.compose)
     implementation (libs.dagger.hilt.android.navigation)
-
+    //log interceptor
+    implementation (libs.okhttp.logging)
+    //lottie
+    implementation(libs.lottie)
     //Retrofit
     implementation (libs.retrofit)
     implementation (libs.retrofit.gson)
     //Serialization
     implementation(libs.kotlin.serialization)
-    //log interceptor
-    implementation (libs.okhttp.logging)
+
     //remote image
     implementation(libs.coil)
 

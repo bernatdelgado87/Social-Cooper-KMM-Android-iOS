@@ -4,8 +4,8 @@ import android.net.Uri
 import java.io.File
 
 data class PublishUiModel(
-    val isLoadingLocalImages: Boolean = false,
-    val errorOnLoadingLocalImages: Boolean = false,
+    val loading: Boolean = false,
+    val error: Boolean = false,
     val localImages: List<Uri>? = null,
-    val selectedPhoto: File? = null
+    val postPublishedSuccess: Boolean = false
 )
