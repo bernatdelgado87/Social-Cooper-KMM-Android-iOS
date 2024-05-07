@@ -57,22 +57,12 @@ fun HomeScreen(navController: NavController) {
             if (state.value.isLoading) {
                 LoadingComponent()
             }
-            if (state.value.isError) {
-                ErrorComponent()
-            }
         },
         showError = state.value.isError,
         actionFloatingButton = {
             navController.navigate(NavigationRoute.PUBLISH_HOME)
         },
         iconVectorFloatingButton = Icons.Rounded.Add
-    )
-}
-
-@Composable
-fun ErrorComponent() {
-    Text(
-        text = "Is Error",
     )
 }
 
