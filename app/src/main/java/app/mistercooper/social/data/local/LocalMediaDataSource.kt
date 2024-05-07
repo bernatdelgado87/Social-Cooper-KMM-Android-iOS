@@ -2,14 +2,15 @@ package app.mistercooper.social.data.local
 
 import android.content.ContentUris
 import android.content.Context
+import android.content.SharedPreferences
 import android.net.Uri
 import android.provider.MediaStore
 import app.mistercooper.social.data.local.entity.ImageMediaItem
 import kotlinx.coroutines.flow.flow
 import java.io.File
+import javax.inject.Inject
 
-class LocalDataSource(private val context: Context) {
-    private val imageAppFolder = File(context.cacheDir, "photos").also { it.mkdir() }
+class LocalMediaDataSource(private val context: Context) {
 
     fun fetchSavedImages() = flow {
         val externalContentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
@@ -73,6 +74,9 @@ class LocalDataSource(private val context: Context) {
 
     private fun generateFileName() = "${System.currentTimeMillis()}.jpg"
 
-    private fun generateFile() = File(imageAppFolder, generateFileName())
+    private fun generateFile(): File {
+        val imageAppFolder = File(context.cacheDir, "photos").also { it.mkdir() }
+        return File(imageAppFolder, generateFileName())
+    }
 
 }

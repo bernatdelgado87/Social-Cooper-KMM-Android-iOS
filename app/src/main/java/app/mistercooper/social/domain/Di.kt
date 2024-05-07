@@ -3,9 +3,12 @@ package app.mistercooper.social.domain
 import android.content.Context
 import app.mistercooper.social.data.MediaRepositoryImpl
 import app.mistercooper.social.data.SocialRepositoryImpl
+import app.mistercooper.social.data.UserRepositoryImpl
+import app.mistercooper.social.data.local.LocalUserDataSource
 import app.mistercooper.social.data.remote.api.CooperApi
 import app.mistercooper.social.domain.repository.MediaRepository
 import app.mistercooper.social.domain.repository.SocialRepository
+import app.mistercooper.social.domain.repository.UserRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,4 +28,7 @@ class Di {
         @Singleton
         fun providesMediaRepository(@ApplicationContext context: Context): MediaRepository = MediaRepositoryImpl(context)
 
+        @Provides
+        @Singleton
+        fun providesUserRepository(api: CooperApi, localUserDataSource: LocalUserDataSource): UserRepository = UserRepositoryImpl(api, localUserDataSource)
 }

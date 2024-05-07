@@ -1,19 +1,23 @@
-package app.mistercooper.social.data.remote.dto
+package app.mistercooper.social.data.remote.dto.response
 
+import androidx.annotation.Keep
 import kotlinx.serialization.Serializable
 
 @Serializable
+@Keep
 data class MultimediaFeedDTO(
     val multimediaModel: List<MultimediaDTO>,
     val morePages: Boolean
 )
 
 @Serializable
+@Keep
 data class LikeSimplifiedDTO (
     val userId: String?,
     val postReference: Int?)
 
 @Serializable
+@Keep
 data class MultimediaDTO (
     val id: Long,
     val userId: Int,

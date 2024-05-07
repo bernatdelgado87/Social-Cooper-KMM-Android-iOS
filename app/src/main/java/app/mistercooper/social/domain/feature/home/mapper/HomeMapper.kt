@@ -1,7 +1,7 @@
 package app.mistercooper.social.domain.feature.home.mapper
 
-import app.mistercooper.social.data.remote.dto.MultimediaDTO
-import app.mistercooper.social.data.remote.dto.MultimediaFeedDTO
+import app.mistercooper.social.data.remote.dto.response.MultimediaDTO
+import app.mistercooper.social.data.remote.dto.response.MultimediaFeedDTO
 import app.mistercooper.social.domain.feature.home.model.FeedModel
 import app.mistercooper.social.domain.feature.home.model.PostModel
 import app.mistercooper.social.domain.feature.home.model.UserModel
