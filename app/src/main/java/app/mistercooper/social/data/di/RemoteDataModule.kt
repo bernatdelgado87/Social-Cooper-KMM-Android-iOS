@@ -4,8 +4,9 @@ import app.mistercooper.social.data.di.annotations.AuthOkHttpClient
 import app.mistercooper.social.data.di.annotations.NotAuthOkHttpClient
 import app.mistercooper.social.data.local.LocalUserDataSource
 import app.mistercooper.social.data.remote.api.CooperAuthenticatedApi
-import app.mistercooper.social.data.remote.api.CooperAuthenticatedApi.Companion.API_URL
+import app.mistercooper.social.data.remote.api.CooperAuthenticatedApi.Companion.SOCIAL_API_URL
 import app.mistercooper.social.data.remote.api.CooperNotAuthenticatedApi
+import app.mistercooper.social.data.remote.api.CooperNotAuthenticatedApi.Companion.USER_API_URL
 import app.mistercooper.social.data.remote.interceptor.AuthInterceptor
 import dagger.Module
 import dagger.Provides
@@ -57,7 +58,7 @@ class RemoteDataModule {
                         .Builder()
                         .client(okHttpClient)
                         .addConverterFactory(GsonConverterFactory.create())
-                        .baseUrl(API_URL)
+                        .baseUrl(SOCIAL_API_URL)
                         .build()
         }
 
@@ -71,7 +72,7 @@ class RemoteDataModule {
                         .Builder()
                         .client(okHttpClient)
                         .addConverterFactory(GsonConverterFactory.create())
-                        .baseUrl(API_URL)
+                        .baseUrl(USER_API_URL)
                         .build()
         }
 

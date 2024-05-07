@@ -37,6 +37,6 @@ class CooperAuthenticatedApi @Inject constructor(private val service: Service) {
     }
 
     companion object {
-        const val API_URL = "http://192.168.1.235:8080/social/"
+        const val SOCIAL_API_URL = "http://192.168.1.235:8080/social/"
     }
 }
