@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import app.mistercooper.social.R
+import app.mistercooper.social.ui.common.components.CommonScaffoldTopBar
 import app.mistercooper.social.ui.common.components.CustomTextField
 import app.mistercooper.social.ui.common.components.LoadingComponent
 import app.mistercooper.social.ui.common.components.TextType
@@ -49,75 +50,83 @@ fun RegisterScreen(navController: NavController) {
         context.findActivity()?.finish()
     }
 
-    Box(modifier = Modifier
-        .fillMaxSize().imePadding()
-        ) {
-
-        Column(
-            modifier = Modifier.fillMaxSize()
-            ,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Text(
-                modifier = Modifier.padding(20.dp),
-                text = stringResource(R.string.registration_registrate_now_title),
-                style = MaterialTheme.typography.headlineLarge
-            )
-
-            CustomTextField(
+    CommonScaffoldTopBar(
+        navController = navController,
+        topBarTitle = stringResource(id = R.string.publish_now_title),
+        content = { modifier ->
+            Box(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentSize(align = Alignment.BottomStart, unbounded = false)
-                    .padding(horizontal = 8.dp, vertical = 10.dp),
-                onTextChanged = { newText ->
-                    userName = newText
-                },
-                showKeyboard = false,
-                placeholderText = stringResource(id = R.string.register_name),
-            )
+                    .fillMaxSize()
+                    .imePadding()
+            ) {
 
-            CustomTextField(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentSize(align = Alignment.BottomStart, unbounded = false)
-                    .padding(horizontal = 8.dp, vertical = 10.dp),
-                onTextChanged = { newText ->
-                    email = newText
-                },
-                showKeyboard = false,
-                placeholderText = stringResource(id = R.string.register_email),
-                type = TextType.EMAIL
-            )
-
-            CustomTextField(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentSize(align = Alignment.BottomStart, unbounded = false)
-                    .padding(horizontal = 8.dp, vertical = 10.dp),
-                onTextChanged = { newText ->
-                    password = newText
-                },
-                showKeyboard = false,
-                placeholderText = stringResource(id = R.string.register_password),
-                type = TextType.PASSWORD
-            )
-            Button(
-                modifier = Modifier
-                    .padding(20.dp)
-                    .fillMaxWidth(),
-                onClick = {
-                    viewModel.registerUser(
-                        email = email,
-                        userName = userName,
-                        password = password
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Text(
+                        modifier = Modifier.padding(20.dp),
+                        text = stringResource(R.string.registration_registrate_now_title),
+                        style = MaterialTheme.typography.headlineLarge
                     )
-                }) {
-                Text(text = "Registrarse")
+
+                    CustomTextField(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .wrapContentSize(align = Alignment.BottomStart, unbounded = false)
+                            .padding(horizontal = 8.dp, vertical = 10.dp),
+                        onTextChanged = { newText ->
+                            userName = newText
+                        },
+                        showKeyboard = false,
+                        placeholderText = stringResource(id = R.string.register_name),
+                    )
+
+                    CustomTextField(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .wrapContentSize(align = Alignment.BottomStart, unbounded = false)
+                            .padding(horizontal = 8.dp, vertical = 10.dp),
+                        onTextChanged = { newText ->
+                            email = newText
+                        },
+                        showKeyboard = false,
+                        placeholderText = stringResource(id = R.string.register_email),
+                        type = TextType.EMAIL
+                    )
+
+                    CustomTextField(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .wrapContentSize(align = Alignment.BottomStart, unbounded = false)
+                            .padding(horizontal = 8.dp, vertical = 10.dp),
+                        onTextChanged = { newText ->
+                            password = newText
+                        },
+                        showKeyboard = false,
+                        placeholderText = stringResource(id = R.string.register_password),
+                        type = TextType.PASSWORD
+                    )
+                    Button(
+                        modifier = Modifier
+                            .padding(20.dp)
+                            .fillMaxWidth(),
+                        onClick = {
+                            viewModel.registerUser(
+                                email = email,
+                                userName = userName,
+                                password = password
+                            )
+                        }) {
+                        Text(text = stringResource(R.string.register_button))
+                    }
+                    if (state.value.loading) {
+                        LoadingComponent()
+                    }
+                }
             }
-            if (state.value.loading) {
-                LoadingComponent()
-            }
-        }
-    }
+        },
+        showError = state.value.error
+    )
 }

@@ -24,5 +24,8 @@
     <string name="register_email">Email</string>
     <string name="register_password">Password</string>
     <string name="registration_registrate_now_title">¡Regístrate ahora!</string>
+    <string name="login_now_title">Introduce tus credenciales</string>
+    <string name="login_button">Acceder</string>
+    <string name="register_button">Acceder</string>
 
 </resources>
