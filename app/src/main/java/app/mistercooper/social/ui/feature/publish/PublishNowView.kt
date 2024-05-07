@@ -105,7 +105,6 @@ fun PublishSelectPhotoContentView(
 ) {
 
     val viewModel = hiltViewModel<PublishViewModel>()
-    val state = viewModel.publishUiModelState.collectAsState()
     var text by remember { mutableStateOf("") }
     var showSheetSourceSelection by remember { mutableStateOf(false) }
 

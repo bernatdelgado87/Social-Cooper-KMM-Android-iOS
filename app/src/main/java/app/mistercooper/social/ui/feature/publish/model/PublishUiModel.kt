@@ -1,7 +1,6 @@
 package app.mistercooper.social.ui.feature.publish.model
 
 import android.net.Uri
-import java.io.File
 
 data class PublishUiModel(
     val loading: Boolean = false,
