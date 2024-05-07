@@ -34,6 +34,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import app.mistercooper.social.R
 import app.mistercooper.social.domain.feature.home.model.PostModel
+import app.mistercooper.social.domain.feature.home.model.UserModel
 import app.mistercooper.social.ui.common.components.CommonScaffoldBottomBar
 import app.mistercooper.social.ui.common.components.LoadingComponent
 import app.mistercooper.social.ui.common.components.UserMiniatureComponent
@@ -86,7 +87,7 @@ fun HomeFeedView(postModels: List<PostModel>?, modifier: Modifier = Modifier) {
                                 .padding(8.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            UserComponent()
+                            UserComponent(post.user)
                         }
                     }
                     if (post.totalLikes > 0) {
@@ -111,10 +112,10 @@ fun HomeFeedView(postModels: List<PostModel>?, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun UserComponent() {
-    UserMiniatureComponent()
+fun UserComponent(userModel: UserModel) {
+    UserMiniatureComponent(userModel.imageProfileUrl.orEmpty())
     Text(
-        text = "Nombre Usuario",
+        text = userModel.userName.orEmpty(),
         style = MaterialTheme.typography.headlineSmall,
         modifier = Modifier.padding(8.dp)
     )

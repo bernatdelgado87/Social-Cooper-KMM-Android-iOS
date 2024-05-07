@@ -13,9 +13,9 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 
 @Composable
-fun UserMiniatureComponent() {
+fun UserMiniatureComponent(imageUrl: String) {
     AsyncImage(
-        model = "https://fastly.picsum.photos/id/40/4106/2806.jpg?hmac=MY3ra98ut044LaWPEKwZowgydHZ_rZZUuOHrc3mL5mI",
+        model = imageUrl,
         contentDescription = "",
         contentScale = ContentScale.Crop,
         modifier = Modifier

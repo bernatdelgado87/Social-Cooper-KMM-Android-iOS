@@ -18,7 +18,6 @@ class CooperAuthenticatedApi @Inject constructor(private val service: Service) {
     suspend fun publishPost(text: String, file: File): Response<MultimediaFeedDTO> {
         val requestBody = MultipartBody.Builder().apply {
             setType(MultipartBody.FORM)
-            addFormDataPart("userId", "1")
             addFormDataPart("description", text)
             addFormDataPart("file", file.name, file.asRequestBody())
         }.build()

@@ -20,12 +20,17 @@ data class LikeSimplifiedDTO (
 @Keep
 data class MultimediaDTO (
     val id: Long,
-    val userId: Int,
+    val user: UserDTO,
     val description: String? = null,
     val relativeUrl: String,
     val absoluteUrl: String,
     val numberOfLikes: Int = 0,
     val likes: List<LikeSimplifiedDTO>? = null)
 
-
-
+@Serializable
+@Keep
+data class UserDTO (
+    val id: Int,
+    val name: String? = null,
+    val profileImage: String? = null
+)

@@ -13,7 +13,7 @@ fun MultimediaFeedDTO.toModel() = FeedModel(
 
 fun MultimediaDTO.toModel() = PostModel(
     id = id,
-    user = UserModel(id = userId),
+    user = UserModel(id = user.id, userName = user.name, imageProfileUrl = user.profileImage),
     description = description,
     imageUrl = absoluteUrl,
     totalLikes = numberOfLikes,

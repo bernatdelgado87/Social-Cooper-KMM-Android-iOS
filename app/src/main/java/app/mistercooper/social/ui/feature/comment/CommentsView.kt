@@ -90,7 +90,7 @@ fun CommentsBottomSheet(
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
             if (totalComments > 0) {
-                CommentsListComponent(viewModelState.value.comments) { viewModel.getComments(postId) }
+                CommentsListComponent(viewModelState.value.commentWrapper?.comments) { viewModel.getComments(postId) }
             } else {
                 Column(
                     modifier = Modifier
@@ -127,12 +127,12 @@ fun CommentsListComponent(comments: List<CommentModel>?, getComments: () -> Unit
         LazyColumn() {
             items(comments) { comment ->
                 Row(modifier = Modifier.padding(vertical = 10.dp)) {
-                    UserMiniatureComponent()
+                    UserMiniatureComponent(comment.user.imageProfileUrl.orEmpty())
                     Column {
                         Row {
                             Text(
                                 modifier = Modifier.padding(horizontal = 8.dp),
-                                text = "Nombre Usuario",
+                                text = comment.user.userName.orEmpty(),
                                 style = MaterialTheme.typography.headlineSmall
                             )
                             Text(
@@ -154,6 +154,7 @@ fun CommentsListComponent(comments: List<CommentModel>?, getComments: () -> Unit
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CommentsFooterComponent(
     postId: Long,
@@ -190,7 +191,7 @@ fun CommentsFooterComponent(
         ) {
             Row(Modifier.fillMaxWidth()) {
 
-                UserMiniatureComponent()
+                UserMiniatureComponent(viewModelState.value.commentWrapper?.myImageUrl.orEmpty())
                 var commentText by remember { mutableStateOf("") }
                 CustomTextField(
                     modifier = Modifier

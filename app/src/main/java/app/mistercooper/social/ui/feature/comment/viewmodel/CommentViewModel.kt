@@ -34,7 +34,7 @@ class CommentViewModel @Inject constructor(
                     _commentUiModelState.emit(commentUiModel.value.copy(isError = true, isLoadingPublish = false))
 
                 }.collect { response ->
-                    _commentUiModelState.emit(PublishCommentUiModel(comments = response))
+                    _commentUiModelState.emit(PublishCommentUiModel(commentWrapper = response))
                 }
         }
     }
@@ -52,7 +52,7 @@ class CommentViewModel @Inject constructor(
                     _commentUiModelState.emit(commentUiModel.value.copy(isError = true, isLoadingComments = false))
 
                 }.collect { response ->
-                    _commentUiModelState.emit(PublishCommentUiModel(comments = response))
+                    _commentUiModelState.emit(PublishCommentUiModel(commentWrapper = response))
                 }
         }
     }
