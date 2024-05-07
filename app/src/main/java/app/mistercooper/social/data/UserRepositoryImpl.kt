@@ -1,7 +1,7 @@
 package app.mistercooper.social.data
 
 import app.mistercooper.social.data.local.LocalUserDataSource
-import app.mistercooper.social.data.remote.api.CooperApi
+import app.mistercooper.social.data.remote.api.CooperNotAuthenticatedApi
 import app.mistercooper.social.data.remote.dto.mapper.toDTO
 import app.mistercooper.social.domain.common.GlobalFailure
 import app.mistercooper.social.domain.feature.user.model.LoginUserModel
@@ -10,7 +10,7 @@ import app.mistercooper.social.domain.repository.UserRepository
 import javax.inject.Inject
 
 class UserRepositoryImpl @Inject constructor(
-    private val apiRemote: CooperApi,
+    private val apiRemote: CooperNotAuthenticatedApi,
     private val localUserDataSource: LocalUserDataSource
 ) : UserRepository {
     override suspend fun registerUser(registerUserModel: RegisterUserModel) {

@@ -5,7 +5,8 @@ import app.mistercooper.social.data.MediaRepositoryImpl
 import app.mistercooper.social.data.SocialRepositoryImpl
 import app.mistercooper.social.data.UserRepositoryImpl
 import app.mistercooper.social.data.local.LocalUserDataSource
-import app.mistercooper.social.data.remote.api.CooperApi
+import app.mistercooper.social.data.remote.api.CooperAuthenticatedApi
+import app.mistercooper.social.data.remote.api.CooperNotAuthenticatedApi
 import app.mistercooper.social.domain.repository.MediaRepository
 import app.mistercooper.social.domain.repository.SocialRepository
 import app.mistercooper.social.domain.repository.UserRepository
@@ -18,10 +19,10 @@ import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
-class Di {
+class DomainModule {
         @Provides
         @Singleton
-        fun providesSocialRepository(api: CooperApi): SocialRepository = SocialRepositoryImpl(api)
+        fun providesSocialRepository(api: CooperAuthenticatedApi): SocialRepository = SocialRepositoryImpl(api)
 
 
         @Provides
@@ -30,5 +31,5 @@ class Di {
 
         @Provides
         @Singleton
-        fun providesUserRepository(api: CooperApi, localUserDataSource: LocalUserDataSource): UserRepository = UserRepositoryImpl(api, localUserDataSource)
+        fun providesUserRepository(api: CooperNotAuthenticatedApi, localUserDataSource: LocalUserDataSource): UserRepository = UserRepositoryImpl(api, localUserDataSource)
 }

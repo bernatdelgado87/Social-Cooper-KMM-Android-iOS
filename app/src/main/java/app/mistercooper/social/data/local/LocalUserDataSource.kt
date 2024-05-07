@@ -1,6 +1,5 @@
 package app.mistercooper.social.data.local
 
-import android.content.Context
 import android.content.SharedPreferences
 import javax.inject.Inject
 
@@ -15,6 +14,6 @@ class LocalUserDataSource @Inject constructor(private val sharedPrefs: SharedPre
         }
     }
 
-    fun getApiKey() = sharedPrefs.getString(keyApiKey, "No Apikey Found")
+    fun getApiKey() = sharedPrefs.getString(keyApiKey, "")
 
 }

@@ -1,6 +1,6 @@
 package app.mistercooper.social.data
 
-import app.mistercooper.social.data.remote.api.CooperApi
+import app.mistercooper.social.data.remote.api.CooperAuthenticatedApi
 import app.mistercooper.social.domain.common.GlobalFailure
 import app.mistercooper.social.domain.feature.comment.model.CommentModel
 import app.mistercooper.social.domain.feature.home.mapper.toModel
@@ -12,7 +12,7 @@ import java.io.File
 import java.util.Date
 import javax.inject.Inject
 
-class SocialRepositoryImpl @Inject constructor(private val apiRemote: CooperApi) :
+class SocialRepositoryImpl @Inject constructor(private val apiRemote: CooperAuthenticatedApi) :
     SocialRepository {
     override suspend fun getFeed(): FeedModel {
         try {

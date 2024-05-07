@@ -60,7 +60,7 @@ fun HomeScreen(navController: NavController) {
         },
         showError = state.value.isError,
         actionFloatingButton = {
-            navController.navigate(NavigationRoute.PUBLISH_HOME)
+            navController.navigate(NavigationRoute.PUBLISH_NOW)
         },
         iconVectorFloatingButton = Icons.Rounded.Add
     )

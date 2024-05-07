@@ -2,13 +2,11 @@ package app.mistercooper.social.data.local
 
 import android.content.ContentUris
 import android.content.Context
-import android.content.SharedPreferences
 import android.net.Uri
 import android.provider.MediaStore
 import app.mistercooper.social.data.local.entity.ImageMediaItem
 import kotlinx.coroutines.flow.flow
 import java.io.File
-import javax.inject.Inject
 
 class LocalMediaDataSource(private val context: Context) {
 
