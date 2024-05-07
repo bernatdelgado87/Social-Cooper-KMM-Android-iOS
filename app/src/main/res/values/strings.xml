@@ -23,5 +23,6 @@
     <string name="register_name">Username</string>
     <string name="register_email">Email</string>
     <string name="register_password">Password</string>
+    <string name="registration_registrate_now_title">¡Regístrate ahora!</string>
 
 </resources>

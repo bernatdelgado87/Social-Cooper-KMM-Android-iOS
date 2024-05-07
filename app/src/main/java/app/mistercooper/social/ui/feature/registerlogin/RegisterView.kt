@@ -1,12 +1,12 @@
 package app.mistercooper.social.ui.feature.registerlogin
 
 import android.content.Intent
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Button
@@ -28,6 +28,7 @@ import androidx.navigation.NavController
 import app.mistercooper.social.R
 import app.mistercooper.social.ui.common.components.CustomTextField
 import app.mistercooper.social.ui.common.components.LoadingComponent
+import app.mistercooper.social.ui.common.components.TextType
 import app.mistercooper.social.ui.common.utils.findActivity
 import app.mistercooper.social.ui.feature.main.MainActivity
 import app.mistercooper.social.ui.feature.registerlogin.viewmodel.RegisterLoginViewModel
@@ -48,16 +49,19 @@ fun RegisterScreen(navController: NavController) {
         context.findActivity()?.finish()
     }
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = Modifier
+        .fillMaxSize().imePadding()
+        ) {
 
         Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally
+            modifier = Modifier.fillMaxSize()
+            ,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
-            Spacer(modifier = Modifier.fillMaxHeight(0.2f))
             Text(
                 modifier = Modifier.padding(20.dp),
-                text = "¡Regístrate ahora!",
+                text = stringResource(R.string.registration_registrate_now_title),
                 style = MaterialTheme.typography.headlineLarge
             )
 
@@ -65,41 +69,39 @@ fun RegisterScreen(navController: NavController) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .wrapContentSize(align = Alignment.BottomStart, unbounded = false)
-                    .padding(horizontal = 8.dp),
+                    .padding(horizontal = 8.dp, vertical = 10.dp),
                 onTextChanged = { newText ->
                     userName = newText
                 },
                 showKeyboard = false,
-                stringResource(id = R.string.register_name),
-                singleLine = false
+                placeholderText = stringResource(id = R.string.register_name),
             )
 
             CustomTextField(
                 modifier = Modifier
                     .fillMaxWidth()
                     .wrapContentSize(align = Alignment.BottomStart, unbounded = false)
-                    .padding(horizontal = 8.dp),
+                    .padding(horizontal = 8.dp, vertical = 10.dp),
                 onTextChanged = { newText ->
                     email = newText
                 },
                 showKeyboard = false,
-                stringResource(id = R.string.register_email),
-                singleLine = false
+                placeholderText = stringResource(id = R.string.register_email),
+                type = TextType.EMAIL
             )
 
             CustomTextField(
                 modifier = Modifier
                     .fillMaxWidth()
                     .wrapContentSize(align = Alignment.BottomStart, unbounded = false)
-                    .padding(horizontal = 8.dp),
+                    .padding(horizontal = 8.dp, vertical = 10.dp),
                 onTextChanged = { newText ->
                     password = newText
                 },
                 showKeyboard = false,
-                stringResource(id = R.string.register_password),
-                singleLine = false
+                placeholderText = stringResource(id = R.string.register_password),
+                type = TextType.PASSWORD
             )
-
             Button(
                 modifier = Modifier
                     .padding(20.dp)
