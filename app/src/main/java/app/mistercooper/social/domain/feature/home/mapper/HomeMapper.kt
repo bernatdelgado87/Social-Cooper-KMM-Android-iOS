@@ -17,5 +17,5 @@ fun MultimediaDTO.toModel() = PostModel(
     description = description,
     imageUrl = absoluteUrl,
     totalLikes = numberOfLikes,
-    totalComments = 10 // fixme!!!
+    totalComments = numberOfComments
 )

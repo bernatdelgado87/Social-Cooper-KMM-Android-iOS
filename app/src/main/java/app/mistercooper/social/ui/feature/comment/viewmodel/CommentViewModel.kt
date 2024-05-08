@@ -56,5 +56,4 @@ class CommentViewModel @Inject constructor(
                 }
         }
     }
-
 }

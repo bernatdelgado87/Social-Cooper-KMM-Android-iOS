@@ -48,7 +48,7 @@ import coil.compose.AsyncImage
 
 @Composable
 fun HomeScreen(navController: NavController) {
-    val viewModel= hiltViewModel<HomeViewModel>()
+    val viewModel = hiltViewModel<HomeViewModel>()
     val state = viewModel.homeUiModel.collectAsState()
 
     CommonScaffoldBottomBar(
@@ -100,10 +100,35 @@ fun HomeFeedView(postModels: List<PostModel>?, modifier: Modifier = Modifier) {
                         )
                     }
                     InteractionIconsComponent(post)
-                    Text(
-                        text = post.description.orEmpty(),
-                        modifier = Modifier.padding(4.dp)
-                    )
+                    if (post.description?.isNotEmpty() == true) {
+                        Text(
+                            text = post.description,
+                            modifier = Modifier.padding(horizontal = 4.dp)
+                        )
+                    }
+                    if (post.totalComments > 0) {
+                        var showSheet by remember { mutableStateOf(false) }
+                        if (showSheet) {
+                            CommentsBottomSheet(
+                                postId = post.id,
+                                writeNow = false
+                            ) {
+                                showSheet = false
+                            }
+                        }
+                        Text(
+                            text = stringResource(
+                                id = R.string.post_comments_total,
+                                post.totalComments
+                            ),
+                            modifier = Modifier
+                                .padding(4.dp)
+                                .clickable {
+                                    showSheet = true
+                                },
+                            style = MaterialTheme.typography.labelLarge
+                        )
+                    }
                     Spacer(modifier = Modifier.height(20.dp))
                 }
             }
@@ -134,7 +159,6 @@ fun InteractionIconsComponent(post: PostModel) {
         if (showSheet) {
             CommentsBottomSheet(
                 postId = post.id,
-                totalComments = post.totalComments,
                 writeNow = true
             ) {
                 showSheet = false

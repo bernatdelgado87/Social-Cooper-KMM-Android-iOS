@@ -64,7 +64,6 @@ import kotlinx.coroutines.launch
 @Composable
 fun CommentsBottomSheet(
     postId: Long,
-    totalComments: Int,
     writeNow: Boolean,
     onDismiss: () -> Unit
 ) {
@@ -89,29 +88,35 @@ fun CommentsBottomSheet(
         dragHandle = { BottomSheetDefaults.DragHandle() },
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
-            if (totalComments > 0) {
-                CommentsListComponent(viewModelState.value.commentWrapper?.comments) { viewModel.getComments(postId) }
-            } else {
-                Column(
-                    modifier = Modifier
-                        .fillMaxHeight(0.8f)
-                        .align(Alignment.Center)
-
-                ) {
-                    Text(
-                        modifier = Modifier.align(Alignment.CenterHorizontally),
-                        text = stringResource(R.string.comments_empty_title),
-                        style = MaterialTheme.typography.headlineLarge,
-                    )
-
-                    Text(
+            viewModelState.value.commentWrapper?.let {
+                if (viewModelState.value.commentWrapper!!.comments.isNotEmpty()) {
+                    CommentsListComponent(viewModelState.value.commentWrapper?.comments) {
+                        viewModel.getComments(
+                            postId
+                        )
+                    }
+                } else {
+                    Column(
                         modifier = Modifier
-                            .align(Alignment.CenterHorizontally)
-                            .padding(vertical = 20.dp),
-                        text = stringResource(R.string.comments_empty_body),
-                        textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.headlineMedium,
-                    )
+                            .fillMaxHeight(0.8f)
+                            .align(Alignment.Center)
+
+                    ) {
+                        Text(
+                            modifier = Modifier.align(Alignment.CenterHorizontally),
+                            text = stringResource(R.string.comments_empty_title),
+                            style = MaterialTheme.typography.headlineLarge,
+                        )
+
+                        Text(
+                            modifier = Modifier
+                                .align(Alignment.CenterHorizontally)
+                                .padding(vertical = 20.dp),
+                            text = stringResource(R.string.comments_empty_body),
+                            textAlign = TextAlign.Center,
+                            style = MaterialTheme.typography.headlineMedium,
+                        )
+                    }
                 }
             }
             CommentsFooterComponent(postId, modalHeight, modalBottomSheetState, writeNow)

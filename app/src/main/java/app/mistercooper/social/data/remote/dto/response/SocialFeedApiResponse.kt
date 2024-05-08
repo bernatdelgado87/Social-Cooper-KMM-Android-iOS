@@ -25,6 +25,7 @@ data class MultimediaDTO (
     val relativeUrl: String,
     val absoluteUrl: String,
     val numberOfLikes: Int = 0,
+    val numberOfComments: Int = 0,
     val likes: List<LikeSimplifiedDTO>? = null)
 
 @Serializable
