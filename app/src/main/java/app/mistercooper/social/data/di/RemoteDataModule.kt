@@ -32,8 +32,8 @@ class RemoteDataModule {
                 val logging = HttpLoggingInterceptor()
                 logging.setLevel(HttpLoggingInterceptor.Level.BODY)
                 val builder = OkHttpClient.Builder()
-                builder.addInterceptor(logging)
                 builder.addInterceptor(authInterceptor)
+                builder.addInterceptor(logging)
                 return builder.build()
         }
 
