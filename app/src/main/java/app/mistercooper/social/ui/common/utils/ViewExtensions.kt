@@ -2,6 +2,7 @@ package app.mistercooper.social.ui.common.utils
 
 import android.content.Context
 import android.content.ContextWrapper
+import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.ManagedActivityResultLauncher
@@ -11,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.core.content.ContextCompat
+import app.mistercooper.social.ui.feature.main.MainActivity
 
 @Composable
 fun Dp.toPx(): Float {
@@ -39,6 +41,11 @@ fun Context.checkCustomPermission(onPermissionGranted: () -> Unit, onPermissionD
     } else {
         onPermissionDenied()
     }
+}
+
+fun Context.restartMainActivity(){
+    startActivity(Intent(this, MainActivity::class.java))
+    findActivity()?.finish()
 }
 
 fun Context.findActivity(): ComponentActivity? = when (this) {

@@ -11,6 +11,7 @@
     <string name="image_selection_body">You can use your camera or upload a file from your device</string>
     <string name="like">Like</string>
     <string name="next">Next</string>
+    <string name="publish_action_button">Publish</string>
     <string name="permission_denied">Permission Denied</string>
     <string name="post_like_people">%d likes</string>
     <string name="post_enter_text_hint">Write something...</string>
@@ -25,7 +26,10 @@
     <string name="register_password">Password</string>
     <string name="registration_registrate_now_title">¡Regístrate ahora!</string>
     <string name="login_now_title">Introduce tus credenciales</string>
-    <string name="login_button">Acceder</string>
-    <string name="register_button">Acceder</string>
+    <string name="login_now_toolbar_title">Login</string>
+    <string name="register_toolbar_title">Register</string>
+    <string name="login_button">Login</string>
+    <string name="register_button">Register</string>
+    <string name="add_photo_hint">Agrega tu foto aquí</string>
 
 </resources>

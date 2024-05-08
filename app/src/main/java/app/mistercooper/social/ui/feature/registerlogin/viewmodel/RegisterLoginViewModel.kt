@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
+import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
@@ -27,13 +28,14 @@ class RegisterLoginViewModel @Inject constructor(
     val registerLoginState = _registerLoginUiModelState.asStateFlow()
 
 
-    fun registerUser(email: String, userName: String, password: String) {
+    fun registerUser(email: String, userName: String, password: String, file: File) {
         viewModelScope.launch {
             registerUserUseCase(
                 RegisterUserModel(
                     name = userName,
                     email = email,
-                    password = password
+                    password = password,
+                    imageProfile = file
                 )
             )
                 .catch {

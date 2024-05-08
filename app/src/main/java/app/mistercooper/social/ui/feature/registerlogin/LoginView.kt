@@ -1,6 +1,5 @@
 package app.mistercooper.social.ui.feature.registerlogin
 
-import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,8 +29,7 @@ import app.mistercooper.social.ui.common.components.CommonScaffoldTopBar
 import app.mistercooper.social.ui.common.components.CustomTextField
 import app.mistercooper.social.ui.common.components.LoadingComponent
 import app.mistercooper.social.ui.common.components.TextType
-import app.mistercooper.social.ui.common.utils.findActivity
-import app.mistercooper.social.ui.feature.main.MainActivity
+import app.mistercooper.social.ui.common.utils.restartMainActivity
 import app.mistercooper.social.ui.feature.registerlogin.viewmodel.RegisterLoginViewModel
 
 @Composable
@@ -39,19 +37,20 @@ fun LoginScreen(navController: NavController) {
     val viewModel = hiltViewModel<RegisterLoginViewModel>()
     val state = viewModel.registerLoginState.collectAsState()
 
+    var canActivateButton by remember { mutableStateOf(false) }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
+    canActivateButton = email.isNotEmpty() && password.isNotEmpty()
+
     if (state.value.registerLoginSuccess) {
-        //todo find a better solution for reset activity
         val context = LocalContext.current
-        context.startActivity(Intent(context, MainActivity::class.java))
-        context.findActivity()?.finish()
+        context.restartMainActivity()
     }
 
     CommonScaffoldTopBar(
         navController = navController,
-        topBarTitle = stringResource(id = R.string.publish_now_title),
+        topBarTitle = stringResource(id = R.string.login_now_toolbar_title),
         content = { modifier ->
 
 
@@ -101,6 +100,7 @@ fun LoginScreen(navController: NavController) {
                         modifier = Modifier
                             .padding(20.dp)
                             .fillMaxWidth(),
+                        enabled = canActivateButton,
                         onClick = {
                             viewModel.login(
                                 email = email,

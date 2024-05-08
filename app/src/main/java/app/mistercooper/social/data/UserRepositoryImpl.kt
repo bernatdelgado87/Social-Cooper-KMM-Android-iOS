@@ -15,7 +15,12 @@ class UserRepositoryImpl @Inject constructor(
 ) : UserRepository {
     override suspend fun registerUser(registerUserModel: RegisterUserModel) {
         try {
-            val response = apiRemote.registerUser(registerUserModel.toDTO())
+            val response = apiRemote.registerUser(
+                name = registerUserModel.name,
+                email = registerUserModel.email,
+                password = registerUserModel.password,
+                imageProfile = registerUserModel.imageProfile
+            )
             if (response.isSuccessful) {
                 response.body()?.let {
                     localUserDataSource.saveApiKey(it.apikey)
