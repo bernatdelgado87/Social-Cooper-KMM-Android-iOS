@@ -1,7 +1,6 @@
 package app.mistercooper.social.domain.feature.comment
 
 import app.mistercooper.social.domain.common.UseCase
-import app.mistercooper.social.domain.feature.comment.model.CommentModel
 import app.mistercooper.social.domain.feature.comment.model.CommentWrapperModel
 import app.mistercooper.social.domain.repository.SocialRepository
 import kotlinx.coroutines.flow.Flow

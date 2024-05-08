@@ -1,6 +1,5 @@
 package app.mistercooper.social.domain.repository
 
-import app.mistercooper.social.domain.feature.comment.model.CommentModel
 import app.mistercooper.social.domain.feature.comment.model.CommentWrapperModel
 import app.mistercooper.social.domain.feature.home.model.FeedModel
 import java.io.File
