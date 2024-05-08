@@ -3,6 +3,7 @@ package app.mistercooper.social.ui.feature.home.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.mistercooper.social.domain.feature.home.usecase.GetFeedUseCase
+import app.mistercooper.social.domain.feature.home.usecase.PublishLikeUseCase
 import app.mistercooper.social.ui.feature.home.model.HomeUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,6 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getFeedUseCase: GetFeedUseCase,
+    private val publishLikeUseCase: PublishLikeUseCase
 ) : ViewModel() {
     private val _homeuiModelState = MutableStateFlow(
         HomeUiModel()
@@ -42,4 +44,23 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun publishLike(postId: Long, like: Boolean) {
+        viewModelScope.launch {
+            publishLikeUseCase(PublishLikeUseCase.PublishLikeParams(postId, like))
+                .catch {
+                    it.printStackTrace()
+                    _homeuiModelState.emit(HomeUiModel(isError = true))
+                }.collect { response ->
+                    _homeuiModelState.emit(HomeUiModel(postModels = homeUiModel.value.postModels?.map { post ->
+                        if (post.id == postId) {
+                            post.copy(hasLiked = like)
+                        } else {
+                            post
+                        }
+                    }
+                    )
+                    )
+                }
+        }
+    }
 }

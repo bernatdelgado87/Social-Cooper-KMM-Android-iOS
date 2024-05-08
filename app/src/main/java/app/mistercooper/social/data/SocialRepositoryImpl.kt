@@ -2,16 +2,12 @@ package app.mistercooper.social.data
 
 import app.mistercooper.social.data.remote.api.CooperAuthenticatedApi
 import app.mistercooper.social.domain.common.GlobalFailure
-import app.mistercooper.social.domain.feature.comment.model.CommentModel
 import app.mistercooper.social.domain.feature.comment.model.CommentWrapperModel
 import app.mistercooper.social.domain.feature.home.mapper.toModel
 import app.mistercooper.social.domain.feature.home.model.FeedModel
-import app.mistercooper.social.domain.feature.home.model.UserModel
 import app.mistercooper.social.domain.feature.mapper.toModel
 import app.mistercooper.social.domain.repository.SocialRepository
-import kotlinx.coroutines.delay
 import java.io.File
-import java.util.Date
 import javax.inject.Inject
 
 class SocialRepositoryImpl @Inject constructor(private val apiRemote: CooperAuthenticatedApi) :
@@ -39,7 +35,8 @@ class SocialRepositoryImpl @Inject constructor(private val apiRemote: CooperAuth
         try {
             val response = apiRemote.publishComment(
                 postId = postId,
-                text = comment)
+                text = comment
+            )
             if (response.isSuccessful) {
                 response.body()?.let {
                     return it.toModel()
@@ -57,7 +54,8 @@ class SocialRepositoryImpl @Inject constructor(private val apiRemote: CooperAuth
             val response = apiRemote.getComments(
                 postId = postId,
                 n = 20,
-                offset = 0)
+                offset = 0
+            )
             if (response.isSuccessful) {
                 response.body()?.let {
                     return it.toModel()
@@ -73,6 +71,24 @@ class SocialRepositoryImpl @Inject constructor(private val apiRemote: CooperAuth
     override suspend fun publishPost(text: String, file: File) {
         try {
             val response = apiRemote.publishPost(text, file)
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    return
+                }
+            }
+            throw GlobalFailure.GlobalError()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            throw GlobalFailure.GlobalError(e)
+        }
+    }
+
+    override suspend fun publishLike(postId: Long, like: Boolean) {
+        try {
+            val response = apiRemote.publishLike(
+                postId = postId,
+                like = like
+            )
             if (response.isSuccessful) {
                 response.body()?.let {
                     return

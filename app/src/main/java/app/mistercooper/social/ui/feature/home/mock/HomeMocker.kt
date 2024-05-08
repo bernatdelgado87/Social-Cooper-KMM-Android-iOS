@@ -9,27 +9,31 @@ fun mockPosts() = listOf(
         "Descripcion",
         "url",
         12,
-        12
+        12,
+        true
     ),
     PostModel(
         1, UserModel(1, "usuario"),
         "Descripcion",
         "url",
         12,
-        0
+        0,
+        false
     ),
     PostModel(
         1, UserModel(1, "usuario"),
         "Descripcion",
         "url",
         12,
-        1
+        1,
+        true
     ),
     PostModel(
         1, UserModel(1, "usuario"),
         "Descripcion",
         "url",
         12,
-        40000
+        40000,
+        false
     )
 )

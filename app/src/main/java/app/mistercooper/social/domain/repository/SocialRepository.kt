@@ -9,4 +9,7 @@ interface SocialRepository {
     suspend fun publishComment(comment: String, postId: Long, commentReferentId: Int? = null): CommentWrapperModel
     suspend fun getComments(postId: Long): CommentWrapperModel
     suspend fun publishPost(text: String, file: File)
+
+    suspend fun publishLike(postId: Long, like: Boolean)
+
 }

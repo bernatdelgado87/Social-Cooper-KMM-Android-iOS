@@ -2,7 +2,9 @@ package app.mistercooper.social.data.remote.api
 
 import app.mistercooper.social.data.remote.dto.mapper.generateMultiPartBody
 import app.mistercooper.social.data.remote.dto.request.PublishCommentBodyDTO
+import app.mistercooper.social.data.remote.dto.request.PublishLikeBodyDTO
 import app.mistercooper.social.data.remote.dto.response.CommentResponseDTO
+import app.mistercooper.social.data.remote.dto.response.LikeResponseDTO
 import app.mistercooper.social.data.remote.dto.response.MultimediaFeedDTO
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -24,6 +26,7 @@ class CooperAuthenticatedApi @Inject constructor(private val service: Service) {
 
     suspend fun getComments(postId: Long, n: Int, offset: Long): Response<CommentResponseDTO> = service.getComments(postId, n, offset)
     suspend fun publishComment(postId: Long, text: String): Response<CommentResponseDTO> = service.publishComment(PublishCommentBodyDTO(postId, text))
+    suspend fun publishLike(postId: Long, like: Boolean): Response<LikeResponseDTO> = service.publishLike(PublishLikeBodyDTO(postId, like))
 
     interface Service {
         @GET("feed")
@@ -45,6 +48,11 @@ class CooperAuthenticatedApi @Inject constructor(private val service: Service) {
         suspend fun publishPost(
             @Body body: RequestBody
         ): Response<MultimediaFeedDTO>
+
+        @POST("like")
+        suspend fun publishLike(
+            @Body body: PublishLikeBodyDTO
+        ): Response<LikeResponseDTO>
 
     }
 

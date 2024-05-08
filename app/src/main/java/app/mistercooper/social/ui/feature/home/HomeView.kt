@@ -13,6 +13,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.FavoriteBorder
 import androidx.compose.material.icons.rounded.MailOutline
 import androidx.compose.material3.Icon
@@ -149,10 +150,15 @@ fun UserComponent(userModel: UserModel) {
 @Composable
 fun InteractionIconsComponent(post: PostModel) {
     Row {
+        val viewModel = hiltViewModel<HomeViewModel>()
         Icon(
-            imageVector = Icons.Rounded.FavoriteBorder,
+            imageVector = if (post.hasLiked) Icons.Rounded.Favorite else Icons.Rounded.FavoriteBorder,
             contentDescription = stringResource(id = R.string.like),
-            modifier = Modifier.padding(4.dp)
+            modifier = Modifier
+                .padding(4.dp)
+                .clickable {
+                    viewModel.publishLike(post.id, !post.hasLiked)
+                }
         )
         var showSheet by remember { mutableStateOf(false) }
 
