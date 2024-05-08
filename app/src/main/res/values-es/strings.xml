@@ -1,24 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="add_photo_content_description">Agregar foto</string>
+    <string name="add_photo_hint">Agrega tu foto aquí</string>
     <string name="app_name">Social Cooper Android</string>
-    <string name="add_photo_content_description">Añadir foto</string>
-    <string name="back">Back</string>
-    <string name="comment">Comentar</string>
+    <string name="back">Volver</string>
+    <string name="comment">Comentario</string>
     <string name="comment_hint">Escribe un comentario...</string>
     <string name="comments_empty_body">Sé el primero en comentar</string>
     <string name="comments_empty_title">Esto está muy vacío</string>
-    <string name="error_message">Error: Algo ha ido mal</string>
-    <string name="image_selection_title">Selección de medios</string>
-    <string name="image_selection_body">Puedes usar tu cámara o subir una imagen de tu dispositivo</string>
+    <string name="error_message">Error: Algo ha salido mal</string>
+    <string name="image_selection_body">Puedes usar tu cámara o subir un archivo desde tu dispositivo</string>
+    <string name="image_selection_title">Selector de origen</string>
     <string name="like">Me gusta</string>
+    <string name="login_button">Iniciar sesión</string>
+    <string name="login_now_title">Introduce tus credenciales</string>
+    <string name="login_now_toolbar_title">Iniciar sesión</string>
     <string name="next">Siguiente</string>
-    <string name="permission_denied">No se han concedido los permisos necesarios</string>
-    <string name="post_like_people">%d Me gusta</string>
+    <string name="permission_denied">Permiso denegado</string>
+    <string name="post_comments_total">Ver %d comentarios</string>
     <string name="post_enter_text_hint">Escribe algo...</string>
+    <string name="post_like_people">%d me gusta</string>
+    <string name="publish_action_button">Publicar</string>
     <string name="publish_camera_option">Cámara</string>
     <string name="publish_files_option">Archivos</string>
     <string name="publish_now_button">Publicar</string>
-    <string name="publish_now_title">Publicación</string>
+    <string name="publish_now_title">Publicar</string>
+    <string name="register_button">Registrar</string>
+    <string name="register_email">Correo electrónico</string>
+    <string name="register_name">Nombre de usuario</string>
+    <string name="register_now_title">¡Regístrate ahora!</string>
+    <string name="register_password">Contraseña</string>
+    <string name="registration_registrate_now_title">¡Regístrate ahora!</string>
+    <string name="register_toolbar_title">Registrar</string>
     <string name="your_photo_content_description">Tu foto</string>
 
 </resources>
