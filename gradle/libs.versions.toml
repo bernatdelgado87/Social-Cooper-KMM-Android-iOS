@@ -18,6 +18,11 @@ logging = "4.10.0"
 coil = "2.6.0"
 animationGraphicsAndroid = "1.6.6"
 lottie = "6.4.0"
+appcompat = "1.6.1"
+material = "1.11.0"
+jetbrainsKotlinJvm = "1.9.23"
+coroutines = "1.8.1"
+accomplish = "0.35.0-alpha"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -42,14 +47,21 @@ dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", ve
 dagger-hilt-android-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref ="android-hilt" }
 dagger-hilt-android-compose = {group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "android-hilt" }
 dagger-hilt-android-navigation = {group = "androidx.hilt", name = "hilt-navigation", version.ref = "android-hilt" }
+dagger-hilt-core = {group = "com.google.dagger", name = "hilt-core", version.ref = "hilt" }
+dagger-hilt-core-compiler = {group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 kotlin-serialization = {group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinSerialization"}
 lottie = { group = "com.airbnb.android", name = "lottie-compose", version.ref = "lottie"}
 okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "logging"  }
 retrofit = {group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-gson = {group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit"}
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines"}
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 daggerHiltAndroid = { id = "com.google.dagger.hilt.android", version.ref = "plugin-hilt"}
 kspAndroid = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
+jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }

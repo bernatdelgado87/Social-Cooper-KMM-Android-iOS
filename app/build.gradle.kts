@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id ("dagger.hilt.android.plugin")
-    id("kotlin-kapt")
     id("com.google.devtools.ksp")
     kotlin("plugin.serialization")
 }
@@ -37,16 +36,18 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.12"
+    }
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
     buildFeatures {
         compose = true
         buildConfig = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.12"
-    }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -55,41 +56,32 @@ android {
 }
 
 dependencies {
+    implementation(project(":ui:ui-common"))
+    implementation(project(":ui:ui-home"))
+    implementation(project(":ui:ui-publish"))
+    implementation(project(":ui:ui-registerLogin"))
+    implementation(project(":ui:ui-comment"))
+    implementation(project(":data:data-main"))
+    implementation(project(":data:data-comment"))
+    implementation(project(":data:data-common"))
+    implementation(project(":data:data-home"))
+    implementation(project(":data:data-publish"))
+    implementation(project(":data:data-register-login"))
+    implementation(project(":domain:domain-comment"))
+    implementation(project(":domain:domain-common"))
+    implementation(project(":domain:domain-home"))
+    implementation(project(":domain:domain-publish"))
+    implementation(project(":domain:domain-register-login"))
 
-    implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
     //Hilt
-    implementation (libs.dagger.hilt.android)
-    implementation(libs.androidx.animation.graphics.android)
-    //Android Hilt
+    implementation(libs.dagger.hilt.android)
+    implementation(libs.dagger.hilt.android.compose)
+    implementation(libs.dagger.hilt.android.navigation)
     ksp (libs.dagger.hilt.android.compiler)
     ksp (libs.dagger.hilt.compiler)
-    implementation (libs.dagger.hilt.android.compose)
-    implementation (libs.dagger.hilt.android.navigation)
-    //log interceptor
-    implementation (libs.okhttp.logging)
-    //lottie
-    implementation(libs.lottie)
-    //Retrofit
-    implementation (libs.retrofit)
-    implementation (libs.retrofit.gson)
-    //Serialization
-    implementation(libs.kotlin.serialization)
-
-    //remote image
-    implementation(libs.coil)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
 }
