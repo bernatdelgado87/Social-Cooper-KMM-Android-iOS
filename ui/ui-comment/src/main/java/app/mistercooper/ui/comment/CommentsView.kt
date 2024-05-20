@@ -53,6 +53,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import app.mistercooper.domain.comment.model.CommentModel
+import app.mistercooper.ui.comment.model.PublishCommentUiModel
 import app.mistercooper.ui.comment.viewmodel.CommentViewModel
 import app.mistercooper.ui.common.utils.toPx
 import kotlinx.coroutines.delay
@@ -60,7 +61,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CommentsBottomSheet(
+fun CommentsBottomSheetScreen(
     postId: Long,
     writeNow: Boolean,
     onDismiss: () -> Unit
@@ -117,7 +118,7 @@ fun CommentsBottomSheet(
                     }
                 }
             }
-            CommentsFooterComponent(postId, modalHeight, modalBottomSheetState, writeNow)
+            CommentsFooterComponent(postId, modalHeight, modalBottomSheetState, writeNow, viewModelState.value)
         }
     }
 }
@@ -166,10 +167,10 @@ fun CommentsFooterComponent(
     postId: Long,
     modalHeight: Int,
     modalBottomSheetState: SheetState,
-    showKeyboard: Boolean
+    showKeyboard: Boolean,
+    uiState: PublishCommentUiModel
 ) {
     val viewModel = hiltViewModel<CommentViewModel>()
-    val viewModelState = viewModel.commentUiModel.collectAsState()
 
     var footerHeight by remember { mutableStateOf(0) }
     val bottomPadding = ButtonDefaults.MinHeight.toPx()
@@ -197,7 +198,7 @@ fun CommentsFooterComponent(
         ) {
             Row(Modifier.fillMaxWidth()) {
 
-                app.mistercooper.ui.common.components.UserMiniatureComponent(viewModelState.value.commentWrapper?.myImageUrl.orEmpty())
+                app.mistercooper.ui.common.components.UserMiniatureComponent(uiState.commentWrapper?.myImageUrl.orEmpty())
                 var commentText by remember { mutableStateOf("") }
                 app.mistercooper.ui.common.components.CustomTextField(
                     modifier = Modifier
@@ -209,7 +210,7 @@ fun CommentsFooterComponent(
                     stringResource(id = R.string.comment_hint),
                     singleLine = false
                 )
-                if (viewModelState.value.isLoadingPublish) {
+                if (uiState.isLoadingPublish) {
                     AnimatedLoadingPublishComment()
                 } else {
                     Icon(

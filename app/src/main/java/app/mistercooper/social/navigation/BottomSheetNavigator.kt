@@ -1,7 +1,7 @@
 package app.mistercooper.social.navigation
 
 import androidx.compose.runtime.Composable
-import app.mistercooper.ui.comment.CommentsBottomSheet
+import app.mistercooper.ui.comment.CommentsBottomSheetScreen
 import app.mistercooper.ui.common.navigation.ArgumentNavigatorWrapper
 import app.mistercooper.ui.common.navigation.BottomSheetRoute
 import app.mistercooper.ui.common.navigation.BottomSheetRoute.COMMENTS
@@ -16,7 +16,7 @@ class CustomNavigatorImpl: CustomNavigator {
                 val writeNow = (args["writeNow"] as? ArgumentNavigatorWrapper.BooleanArg)?.value ?: false
                 val onDismiss = (args["onDismiss"] as? ArgumentNavigatorWrapper.FunctionArg)?.value ?: throw Exception("No value for onDismiss")
 
-                CommentsBottomSheet(
+                CommentsBottomSheetScreen(
                     postId = postId,
                     writeNow = writeNow,
                     onDismiss = onDismiss

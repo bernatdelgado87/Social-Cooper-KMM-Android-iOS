@@ -1,6 +1,7 @@
 package app.mistercooper.ui.common.components
 
 import android.Manifest
+import android.content.Context
 import android.net.Uri
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -61,10 +62,19 @@ fun SelectSourceBottomSheet(
     }
 
     if (launchCamera) {
+        val context = LocalContext.current
+        val file = context.createImageFile()
+        val uri = FileProvider.getUriForFile(
+            Objects.requireNonNull(context),
+            buildConfigFieldsProvider.get().appId + ".provider",
+            file
+        )
+
         CameraLauncherComponent (
-            {launchCamera = false
-            onDismiss()},
-            buildConfigFieldsProvider
+            onPhotoProcessFinished = {launchCamera = false
+                onDismiss()},
+            onPhotoSelected = { uri -> mediaViewModel.onPhotoSelected(uri) },
+            destinationUri = uri
         )
     }
 
@@ -141,28 +151,26 @@ fun SelectSourceBottomSheet(
 }
 
 @Composable
-fun CameraLauncherComponent(onPhotoProcessFinished: () -> Unit, buildConfigFieldsProvider: BuildConfigFieldsProvider) {
-    val mediaViewModel = hiltViewModel<MediaViewModel>()
+fun CameraLauncherComponent(
+    onPhotoProcessFinished: () -> Unit,
+    onPhotoSelected: (uri: Uri) -> Unit,
+    destinationUri: Uri
+) {
+    val context = LocalContext.current
     var capturedImageUri by remember {
         mutableStateOf<Uri>(Uri.EMPTY)
     }
-    val context = LocalContext.current
-    val file = context.createImageFile()
-    val uri = FileProvider.getUriForFile(
-        Objects.requireNonNull(context),
-        buildConfigFieldsProvider.get().appId + ".provider",
-        file
-    )
+
     val cameraLauncher =
         rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()) { isPhotoTaken ->
             if (isPhotoTaken) {
-                capturedImageUri = uri
+                capturedImageUri = destinationUri
             } else {
                 onPhotoProcessFinished()
             }
         }
     val permissionLauncher = requestCameraPermission(
-        onPermissionGranted = { cameraLauncher.launch(uri) },
+        onPermissionGranted = { cameraLauncher.launch(destinationUri) },
         onPermissionDenied = {
             Toast.makeText(
                 context,
@@ -171,11 +179,11 @@ fun CameraLauncherComponent(onPhotoProcessFinished: () -> Unit, buildConfigField
         })
 
     if (capturedImageUri.path?.isNotEmpty() == true) {
-        mediaViewModel.onPhotoSelected(capturedImageUri)
+        onPhotoSelected(capturedImageUri)
         onPhotoProcessFinished()
     }
     LaunchedEffect(Unit) {
-        context.checkCustomPermission({ cameraLauncher.launch(uri) }, {
+        context.checkCustomPermission({ cameraLauncher.launch(destinationUri) }, {
             permissionLauncher.launch(
                 Manifest.permission.CAMERA
             )
