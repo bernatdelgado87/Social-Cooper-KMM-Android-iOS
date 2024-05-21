@@ -18,10 +18,10 @@ class MediaViewModel @Inject constructor(
     private val getMediaImagesFromDeviceUseCase: GetMediaImagesFromDeviceUseCase,
     private val getImageFromUriUseCase: GetImageFromUriUseCase,
 ) : ViewModel() {
-    private val _mediaUiModelState = MutableStateFlow(
-        MediaUiModel()
+    private val _errorState = MutableStateFlow(
+        false
     )
-    val mediaUiModelState = _mediaUiModelState.asStateFlow()
+    val errorState = _errorState.asStateFlow()
 
     var selectedFile: MutableStateFlow<File?> = MutableStateFlow(null)
 
@@ -30,7 +30,7 @@ class MediaViewModel @Inject constructor(
             getMediaImagesFromDeviceUseCase()
                 .catch {
                     it.printStackTrace()
-                    _mediaUiModelState.emit(MediaUiModel(error = true))
+                    _errorState.emit(true)
                 }
         }
     }
@@ -43,7 +43,7 @@ class MediaViewModel @Inject constructor(
                         ).collect { file ->
                             selectedFile.emit(file)
                         }
-            } ?: _mediaUiModelState.emit(MediaUiModel(error = true))
+            } ?: _errorState.emit(true)
         }
     }
 

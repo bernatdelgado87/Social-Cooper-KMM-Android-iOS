@@ -4,6 +4,7 @@ import app.mistercooper.domain.common.utils.convertDateFromServer
 import app.mistercooper.domain.common.feature.user.model.UserModel
 import app.mistercooper.data.comment.remote.dto.response.CommentDTO
 import app.mistercooper.data.comment.remote.dto.response.CommentResponseDTO
+import app.mistercooper.domain.comment.model.CommentWrapperModel
 
 fun CommentDTO.toModel() = app.mistercooper.domain.comment.model.CommentModel(
     content,
@@ -15,6 +16,6 @@ fun CommentDTO.toModel() = app.mistercooper.domain.comment.model.CommentModel(
     )
 )
 
-fun CommentResponseDTO.toModel() = app.mistercooper.domain.comment.model.CommentWrapperModel(
+fun CommentResponseDTO.toModel() = CommentWrapperModel(
     imageUrl,
     comments.map { comment -> comment.toModel() })
